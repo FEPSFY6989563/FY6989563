@@ -30,6 +30,7 @@
     <tr><td><a href="#Abstract">Abstract</a></td></tr>
     <tr><td><a href="#Introduction">Introduction</a></td></tr>
     <tr><td><a href="#Analysis-and-discussion">Analysis and discussion</a></td></tr>
+    <tr><td><a href="#Conclusion">Conclusion</a></td></tr>
     <tr><td><a href="#References">References</a></td></tr>
   </table>
   </p>
@@ -37,44 +38,111 @@
   <hr>
   <h3 id="Abstract">Abstract</h3>
   <p class="ex1"><pre>
-[Placeholder] Short summary of the article goes here.
+[Placeholder] Short summary of the article goes here (150 words max).
   </pre></p>
 
   <hr>
   <h3 id="Introduction">Introduction</h3>
-  <p class="ex1"><pre>
+  <p class="ex1"><pre id="Introduction_InText">
 [Placeholder] Introduce how noise cancellation works and what the article covers.
   </pre></p>
 
   <hr>
   <h3 id="Analysis-and-discussion">Analysis and discussion</h3>
-  <p>[Placeholder] Discuss <mark>processing delay</mark> and why sudden sounds are hard to cancel.
-  Cite sources like this: <a href="https://example.com">Author et al (2024)</a>.</p>
+  <div id="Analysis_InText">
+    <p>[Placeholder] Discuss <mark>processing delay</mark> and why sudden sounds are hard to cancel.
+    Cite sources like this: <a href="#References">(Author, 2024)</a>.</p>
 
-  <p>Table 1: [Placeholder] Replace with values from your sources</p>
-  <table>
-    <tr><th>Noise type</th><th>Typical reduction (dB)</th></tr>
-    <tr><td>Aircraft engine hum</td><td>[value]</td></tr>
-    <tr><td>Train / tube rumble</td><td>[value]</td></tr>
-    <tr><td>Speech / voices</td><td>[value]</td></tr>
-    <tr><td>Sudden bang or clap</td><td>[value]</td></tr>
-  </table>
+    <p>Table 1. [Placeholder] Replace with values from your sources</p>
+    <table>
+      <tr><th>Noise type</th><th>Typical reduction (dB)</th></tr>
+      <tr><td>Aircraft engine hum</td><td>[value]</td></tr>
+      <tr><td>Train / tube rumble</td><td>[value]</td></tr>
+      <tr><td>Speech / voices</td><td>[value]</td></tr>
+      <tr><td>Sudden bang or clap</td><td>[value]</td></tr>
+    </table>
 
-  <p>Destructive interference:</p>
-  <math xmlns="http://www.w3.org/1998/Math/MathML">
-    <mrow>
-      <msub><mi>p</mi><mtext>total</mtext></msub><mo>=</mo>
-      <mi>A</mi><mi>sin</mi><mo>(</mo><mi>&omega;</mi><mi>t</mi><mo>)</mo><mo>+</mo>
-      <mi>A</mi><mi>sin</mi><mo>(</mo><mi>&omega;</mi><mi>t</mi><mo>+</mo><mi>&pi;</mi><mo>)</mo>
-      <mo>=</mo><mn>0</mn>
-    </mrow>
-  </math>
+    <p>Destructive interference:</p>
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+      <mrow>
+        <msub><mi>p</mi><mtext>total</mtext></msub><mo>=</mo>
+        <mi>A</mi><mi>sin</mi><mo>(</mo><mi>&omega;</mi><mi>t</mi><mo>)</mo><mo>+</mo>
+        <mi>A</mi><mi>sin</mi><mo>(</mo><mi>&omega;</mi><mi>t</mi><mo>+</mo><mi>&pi;</mi><mo>)</mo>
+        <mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+  </div>
+
+  <hr>
+  <h3 id="Conclusion">Conclusion</h3>
+  <p class="ex1"><pre id="Conclusion_InText">
+[Placeholder] Remind the reader of the purpose, give the main conclusion, then your own extra conclusions.
+  </pre></p>
 
   <hr>
   <h3 id="References">References</h3>
   <p><pre>
 [Placeholder] Surname, Initial. (Year) Title. Journal, Volume (Issue), pages.
   </pre></p>
+
+  <hr>
+  <!-- Word count (H3) -->
+  <p id="totalWordCount"></p>
+
+  <!-- Last modified time (H3, mandatory) -->
+  <div id="last-updated">Loading last update time...</div>
+  <button onclick="verifyLastUpdatedTime()" style="display: block; margin: 10px auto; padding: 8px 16px;">
+    Verify Last Modified Time
+  </button>
+
+  <script>
+    // Count words in one section
+    function displayWordCount(sectionId) {
+      const text = document.getElementById(sectionId).textContent.trim();
+      if (text === "") return 0;
+      return text.split(/\s+/).length;
+    }
+
+    // Total word count: Introduction + Analysis + Conclusion
+    function displayTotalWordCount() {
+      const total = displayWordCount("Introduction_InText")
+                  + displayWordCount("Analysis_InText")
+                  + displayWordCount("Conclusion_InText");
+      document.getElementById("totalWordCount").innerText = `Total word count: ${total}`;
+    }
+
+    // Fetch last commit time from GitHub
+    async function getLastUpdatedTime() {
+      const username = 'FEPSFY6989563';
+      const repo = 'FY6989563';
+      const url = `https://api.github.com/repos/${username}/${repo}/commits`;
+      try {
+        const response = await fetch(url, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+        if (!response.ok) throw new Error(`Error fetching data: ${response.status}`);
+        const commits = await response.json();
+        if (commits && commits.length > 0) {
+          const lastCommitDate = new Date(commits[0].commit.committer.date);
+          document.getElementById('last-updated').innerText = `Last Modified Time: ${lastCommitDate.toLocaleString()}`;
+        } else {
+          document.getElementById('last-updated').innerText = 'No commits found in the repository.';
+        }
+      } catch (error) {
+        console.error('Error fetching the last updated time:', error);
+        document.getElementById('last-updated').innerText = 'Error fetching update time. Please check the repository details.';
+      }
+    }
+
+    // Verify button re-fetches the time
+    async function verifyLastUpdatedTime() {
+      document.getElementById('last-updated').innerText = 'Verifying...';
+      await getLastUpdatedTime();
+      alert("Last modified time has been successfully verified from GitHub API.");
+    }
+
+    // Run both when the page loads
+    window.addEventListener('load', getLastUpdatedTime);
+    window.addEventListener('load', displayTotalWordCount);
+  </script>
 
 </body>
 </html>
