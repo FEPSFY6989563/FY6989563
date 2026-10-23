@@ -38,7 +38,10 @@
   <hr>
   <h3 id="Abstract">Abstract</h3>
   <p class="ex1"><pre>
-[Placeholder] Short summary of the article goes here (150 words max).
+ANC depends primarily on destructive interference. It measures the incoming wave sound and works to produce a wave in anti-phase to achieve near perfect cancellation through superposition (Kuo and Morgan, 1999). 
+Microphones measure the noise, a digital signal processor (DSP), a tiny specialised chip, determines the inverted anti-noise signal. The speaker then plays the signal in addition to the music. In a feedforward system, the microphone is placed on the outside of the ear cup, allowing it to detect noise before it reaches the ear. On the other hand, a feedback system has the microphone inside the ear cup, where it picks up any noise that still gets through. Many modern headphones use a hybrid system, which combines both approaches by having microphones on the inside and outside of the ear cup to cancel out noise more effectively (Wu et al., 2016).
+The anti-noise cannot be calculated once and reused because the noise keeps changing; the DSP uses an adaptive filter instead, which is a set of numbers called weights. The inside microphone measures the residual noise (whatever is left over), and the algorithm nudges each weight in the direction that reduces it. The algorithm most used for this is filtered-x least mean square (FxLMS) (Kuo and Morgan, 1999; Lu et al., 2021).
+
   </pre></p>
 
   <hr>
