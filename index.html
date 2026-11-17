@@ -6,7 +6,7 @@
   <title>ENG0018 Conference Paper</title>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <style>
-    table { font-family: arial, sans-serif; border-collapse: collapse; width: 30%; }
+    table { font-family: arial, sans-serif; border-collapse: collapse; width: 70%; }
     td, th { border: 1px solid #dddddd; text-align: left; padding: 8px; }
     tr:nth-child(even) { background-color: #dddddd; }
     p.ex1 { margin-left: 250px; }
@@ -38,41 +38,28 @@
   <hr>
   <h3 id="Abstract">Abstract</h3>
   <p>
-Active noise cancellation (ANC) headphones can almost silence the drone of an aircraft engine and
-yet the slam of a door is still audible. This article explains why. ANC works by measuring incoming
-sound with microphones and playing an inverted copy of it, so the two waves cancel by destructive
-interference. Sudden sounds are hard for three reasons: they are unpredictable, they are mostly high
-frequency, and they are too brief for the adaptive filter to adjust. Table 1 demonstrates an example
-of a delay; a lag of just 0.1 ms means a 2 kHz sound ends up louder instead of quieter. Noise
-cancellation and robust algorithms minimise the effect of the sudden sounds heard by the headphones,
-however due to the physics of the delay, not all the noise can be fully diminished.
+Active noise cancellation (ANC) headphones can almost silence the drone of an aircraft engine and yet the slam of a door is still audible. This article explains why. ANC works by measuring incoming sound with microphones and playing an inverted copy of it, so the two waves cancel by destructive interference. Sudden sounds are hard for three reasons: they are unpredictable, they are mostly high frequency, and they are too brief for the adaptive filter to adjust. Table 1 demonstrates an example of a delay; a lag of just 0.1 ms means a 2 kHz sound ends up louder instead of quieter. Passive noise cancellation and impulse-robust algorithms reduce the effect of sudden sounds; however, because of the delay, not all of the noise can be cancelled.
   </p>
 
   <hr>
   <h3 id="Introduction">Introduction</h3>
   <p id="Introduction_InText">
-Put on a pair of noise-cancelling headphones on the Tube and the low rumble of the train almost
-disappears. But you might also notice the slam of the doors is still audible.  So what is active noise cancellation (ANC)? It is a technology in which microphones pick up surrounding sound and the headphones play an opposing sound wave, which cancels the noise through destructive interference. Science writer
-<a href="#References">Banino (2022)</a> notes that loud, high-pitched sounds are ‘a little too much’ for ANC. This piece
-explores how ANC operates, the three reasons as to why we can't overcome sudden sounds and how some
-of our best engineers and researchers are taking action to minimise the effect of this.
+Put on a pair of noise-cancelling headphones on the Tube and the low rumble of the train almost disappears. But you might also notice the slam of the doors is still audible. So what is active noise cancellation (ANC)? It is a technology in which microphones pick up surrounding sound and the headphones play an opposing sound wave, which cancels the noise through destructive interference. Science writer <a href="#References">Banino (2022)</a> notes that loud, high-pitched sounds are ‘a little too much’ for ANC. This piece explores how ANC operates, the three reasons why ANC can’t cancel sudden sounds, and how engineers are tackling this.
   </p>
 
   <hr>
   <h3 id="Analysis-and-discussion">Analysis and discussion</h3>
   <div id="Analysis_InText">
     <h4>How Active Noise Cancellation Works</h4>
-    <p>ANC depends primarily on destructive interference. It measures the incoming wave sound and works to produce a wave in anti-phase to achieve near perfect cancellation through superposition <a href="#References">(Kuo and Morgan, 1999)</a>.</p>
-
-
-    <p>Microphones measure the noise, a digital signal processor (DSP), a tiny specialised chip, determines the inverted anti-noise signal. The speaker then plays the signal in addition to the music. In a feedforward system, the microphone is placed on the outside of the ear cup, allowing it to detect noise before it reaches the ear. On the other hand, a feedback system has the microphone inside the ear cup, where it picks up any noise that still gets through. Many modern headphones use a hybrid system, which combines both approaches by having microphones on the inside and outside of the ear cup to cancel out noise more effectively <a href="#References">(Wu et al., 2016)</a>.</p>
-    <p>The anti-noise cannot be calculated once and reused because the noise keeps changing; the DSP uses an adaptive filter instead, which is a set of numbers called weights. The inside microphone measures the residual noise (whatever is left over), and the algorithm nudges each weight in the direction that reduces it. The algorithm most used for this is filtered-x least mean square (FxLMS) <a href="#References">(Kuo and Morgan, 1999; Lu et al., 2021)</a>.</p>
+    <p>ANC depends primarily on destructive interference. It measures the incoming sound wave and works to produce a wave in antiphase to achieve near-perfect cancellation through superposition <a href="#References">(Kuo and Morgan, 1999)</a>.</p>
+    <p>The microphone picks up the noise. A small chip (the DSP, digital signal processor) works out the inverted “anti-noise” signal. The speaker plays the anti-noise along with your music. ANC headphones can be built in three different ways <a href="#References">(Wu et al., 2016)</a>. In a feedforward system, the microphone is placed outside the ear cup, so it picks up the noise before it reaches your ear. In a feedback system, the microphone is positioned inside the ear cup, next to your ear, and corrects the anti-noise based on what it hears. As it only works with noise already inside the ear cup, it has no head start, so it is worse at sudden noise. A hybrid system uses both microphones.</p>
+    <p>The anti-noise cannot be calculated once and reused because the noise keeps changing; the DSP uses an adaptive filter instead, which is a set of numbers called weights. The inside microphone measures the residual noise (whatever is left over), and the algorithm nudges each weight in the direction that reduces it. The most commonly used algorithm is filtered-x least mean square (FxLMS) <a href="#References">(Kuo and Morgan, 1999; Lu et al., 2021)</a>.</p>
 
     <h4>Why Sudden Noise Gets Through</h4>
     <h5>Timing</h5>
-    <p>The first problem is timing. A sound is detected by the external microphone a tiny fraction of a second before it reaches your ears. If the microphone is around 2 cm from the ear and sound travels at 343 metres per second, the headphones have only about 0.06 milliseconds to respond, much faster than the blink of an eye. This is less of a problem for continuous sounds, such as an engine humming, because the headphones can use previous sound patterns to predict what comes next. However, sudden noises like a loud bang are unpredictable, meaning the system often cannot react quickly enough to cancel them <a href="#References">(Kuo and Morgan, 1999)</a>.</p>
+    <p>A sound is detected by the external microphone a tiny fraction of a second before it reaches your ears. If the microphone is around 2 cm from the ear and sound travels at 343 metres per second, the headphones have only about 0.06 milliseconds to respond. This is less of a problem for continuous sounds, such as an engine humming, because the headphones can use previous sound patterns to predict what comes next. However, sudden noises like a loud bang are unpredictable, meaning the system often cannot react quickly enough to cancel them <a href="#References">(Kuo and Morgan, 1999)</a>.</p>
     <h5>Frequency</h5>
-    <p>The second dilemma is frequency. Abrupt noises - doors slamming, balloons popping, glass shattering - consist of an abundance of high frequencies, conversely, long consistent sounds such as hums carry low frequencies. The dilemma is the fixed time delay, if the fixed time delay attempts to sync with high frequencies, it only lags behind (due to high frequency completing more cycles in a given time pushing the waves more out of phase) which is best observed through an example as provided in table 1.</p>
+    <p>Abrupt noises, such as doors slamming, balloons popping and glass shattering, consist of high frequencies, whereas long, consistent sounds such as hums carry low frequencies. The problem is the fixed time delay. When the anti-noise tries to keep up with high frequencies, it lags behind, because high frequencies complete more cycles in a given time, pushing the waves further out of phase. This can be seen in Table 1.</p>
 
     <p>Table 1: Effect of an assumed 0.1 ms delay on cancellation at different frequencies (author's example calculation)</p>
     <table>
@@ -83,26 +70,22 @@ of our best engineers and researchers are taking action to minimise the effect o
       <tr><td>2000</td><td>Clatter, dog bark</td><td>72</td><td>+1.4 (louder)</td></tr>
     </table>
     <p>Phase error is how far out of step the anti-noise is with the noise, caused by the delay. The larger the phase error, the weaker the cancellation, and at large enough values the anti-noise starts to amplify the noise instead. The dB column shows the change in sound level compared with ANC switched off: negative values mean the sound is reduced, whereas positive values mean it is amplified.</p>
+    <p>At 2 kHz, cancellation turns into amplification. Real headphones avoid this by deliberately reducing cancellation at high frequencies. Measurements on a hybrid ANC headphone show the same trend: over 20 dB of reduction between 100–400 Hz but only 5–15 dB between 500–800 Hz <a href="#References">(Wu et al., 2016)</a>.</p>
 
-    <p>The amplification dilemma starts to become more severe at 2kHz, as an attempt to cancel out the noise through superposition in turn amplifies it. Real headphones avoid this due to their well worked engineering to reduce cancellation. Measurements on a hybrid ANC headphone showcase the same trend; over 20 dB of reduction between 100-400 Hz but only 5-15 dB between 500-800 Hz <a href="#References">(Wu et al., 2016)</a>.</p>
     <h5>The adaptive filter</h5>
-    <p>The final limitation is the adaptive filter; the FxLMS algorithm takes some time as it adjusts the weights until the correct values to cancel the noise are obtained. <a href="#References">Lu et al. (2021)</a> describe sudden bursts of sound as "low probability but large amplitude" and explain that traditional algorithms struggle to adapt to them. <a href="#References">Sun, Kuo, and Meng (2006)</a> also demonstrated that sudden noises can cause large changes in the filter weights, provoking the system making it unstable. The noise often ends before the filter has enough time to adapt.</p>
+    <p>The FxLMS algorithm alters the weights bit by bit until the anti-noise matches the noise. However, sudden noise is too short: the sound finishes before the filter has finished adjusting. <a href="#References">Lu et al. (2021)</a> call sudden noise ‘low probability but large amplitude’, meaning it is rare but loud, so normal algorithms struggle to adapt to it. <a href="#References">Sun, Kuo and Meng (2006)</a> show that it can make things worse: loud bangs make the weights jump a lot, causing the system to become unstable.</p>
 
     <h4>Current Solutions and Their Limits</h4>
-    <p>The primary solution is passive noise cancellation, which operates by physically blocking sound from reaching the ear <a href="#References">(Banino, 2022)</a>. Materials such as foamed cushions and tightly sealed ear cups do well to fade high frequency sounds; where ANC struggles most. Nevertheless, passive materials are not very effective against low-frequency noise <a href="#References">(Lu et al., 2021)</a>, hence they best work when used simultaneously.</p>
-    <p>The second approach involves using impulse-robust algorithms. <a href="#References">Sun, Kuo, and Meng (2006)</a> introduced a method that limits the reference signal by setting a maximum value. This meant that a single loud impulse varied the weights very slightly.</p>
-    <p>These algorithms work well to prevent ANC from becoming unstable but they are unable to completely cancel out the impulse. By limiting how the system responds to loud sounds, some of the noise that the listener wants to block out is still allowed through. The prediction and delay crisis still remain. As a result, sudden sounds still depend on passive noise cancellation.</p>
+    <p>The primary solution is passive noise cancellation, which operates by physically blocking sound from reaching the ear <a href="#References">(Banino, 2022)</a>. Materials such as foam cushions and tightly sealed ear cups do well to reduce high-frequency sounds, which is where ANC struggles most. Nevertheless, passive materials are not very effective against low-frequency noise <a href="#References">(Lu et al., 2021)</a>, so the two work best together.</p>
+    <p>The second approach involves using impulse-robust algorithms. <a href="#References">Sun, Kuo and Meng (2006)</a> introduced a method that limits the reference signal by setting a maximum value. This meant that a single loud impulse could only change the weights slightly.</p>
+    <p>These algorithms work well to prevent ANC from becoming unstable, but they are unable to completely cancel out the impulse. By limiting how the system responds to loud sounds, some of the noise that the listener wants to block out is still allowed through. The prediction and delay problems still remain. As a result, sudden sounds still depend on passive noise cancellation.</p>
 
   </div>
 
   <hr>
   <h3 id="Conclusion">Conclusion</h3>
   <p id="Conclusion_InText">
-ANC struggles with sudden noises for three primary reasons: they cannot be predicted, their duration
-is too short for the adaptive filter to adapt, they contain high frequencies where delays ruin the
-effect of cancellation. Thus, ANC works well with low frequency noise whilst passive noise
-cancellation aids fading in sudden sounds. Although faster processors and better algorithms may be
-able to reduce these limitations, they struggle to overcome the delay.
+ANC struggles with sudden noises for three primary reasons: they cannot be predicted, their duration is too short for the adaptive filter to adapt, and they contain high frequencies where delays ruin the effect of cancellation. Thus, ANC works well with low-frequency noise, whilst passive noise cancellation helps reduce sudden sounds. Although faster processors and better algorithms may be able to reduce these limitations, they struggle to overcome the delay.
   </p>
 
   <hr>
