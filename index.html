@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ENG0018 Conference Paper</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <style>
     table { font-family: arial, sans-serif; border-collapse: collapse; width: 70%; }
@@ -81,6 +82,31 @@ Put on a pair of noise-cancelling headphones on the Tube and the low rumble of t
     <p>These algorithms work well to prevent ANC from becoming unstable, but they are unable to completely cancel out the impulse. By limiting how the system responds to loud sounds, some of the noise that the listener wants to block out is still allowed through. The prediction and delay problems still remain. As a result, sudden sounds still depend on passive noise cancellation.</p>
 
   </div>
+
+  <div id="chart_div"></div>
+  <script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Frequency (Hz)', 'Change in sound level (dB)'],
+        ['100', -24],
+        ['500', -10],
+        ['1000', -4],
+        ['2000', 1.4]
+      ]);
+
+      var options = {
+        title: 'Figure 1: Change in sound level with a 0.1 ms delay',
+        hAxis: { title: 'Frequency (Hz)' },
+        vAxis: { title: 'Change in sound level (dB)' }
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
 
   <hr>
   <h3 id="Conclusion">Conclusion</h3>
